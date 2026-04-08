@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UWRMS — Waste Intelligence Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 17h6M17 14v6" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="logo-text">UWRMS</div>
+        <div class="logo-sub">Waste Intelligence</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-tab="overview">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/></svg>
+        Overview
+      </a>
+      <a href="#" class="nav-item" data-tab="sensors">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+        Sensors
+      </a>
+      <a href="#" class="nav-item" data-tab="biogas">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/></svg>
+        Biogas Loop
+      </a>
+      <a href="#" class="nav-item" data-tab="ai">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 110-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clip-rule="evenodd"/></svg>
+        AI Models
+      </a>
+      <a href="#" class="nav-item" data-tab="facilities">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"/></svg>
+        Facilities
+      </a>
+      <a href="#" class="nav-item" data-tab="alerts">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/></svg>
+        Alerts
+        <span class="nav-badge" id="alert-badge">3</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="reports">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd"/></svg>
+        Reports
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="system-status">
+        <div class="status-dot pulse"></div>
+        <span>All Systems Nominal</span>
+      </div>
+      <div class="auto-toggle">
+        <span class="auto-label">Auto-Mode</span>
+        <label class="switch">
+          <input type="checkbox" id="autoToggle" checked/>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="page-title" id="page-title">Overview</h1>
+        <span class="page-sub">Real-time waste intelligence dashboard</span>
+      </div>
+      <div class="topbar-right">
+        <div class="live-time mono" id="live-time"></div>
+        <div class="status-pill">
+          <div class="pulse-dot"></div>
+          Live Feed
+        </div>
+        <button class="icon-btn" title="Settings">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===================== OVERVIEW TAB ===================== -->
+    <section class="tab-content active" id="tab-overview">
+      <!-- KPI Row -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:rgba(34,197,94,.12);color:#22c55e">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/></svg>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-label">Waste Detected</div>
+            <div class="kpi-value mono" id="kpi-waste">142 kg</div>
+            <div class="kpi-delta up">↑ 12% vs yesterday</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:rgba(45,212,191,.12);color:#2dd4bf">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/></svg>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-label">Biogas Produced</div>
+            <div class="kpi-value mono" id="kpi-biogas">38.4 m³</div>
+            <div class="kpi-delta up">↑ Digester active</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:rgba(96,165,250,.12);color:#60a5fa">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clip-rule="evenodd"/></svg>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-label">CO₂ Offset</div>
+            <div class="kpi-value mono" id="kpi-co2">67 kg</div>
+            <div class="kpi-delta up">↑ 8% this week</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon" style="background:rgba(245,158,11,.12);color:#f59e0b">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-label">Cost Saved</div>
+            <div class="kpi-value mono" id="kpi-cost">₹840</div>
+            <div class="kpi-delta up">↑ ROI positive</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middle Row -->
+      <div class="row-grid">
+        <!-- Waste Mix -->
+        <div class="card">
+          <div class="card-head"><span class="card-title">Waste Stream Mix</span><span class="badge badge-green">Live</span></div>
+          <div id="waste-streams">
+            <div class="stream-item">
+              <div class="stream-dot" style="background:#22c55e"></div>
+              <span class="stream-name">Organic / Kitchen</span>
+              <div class="stream-bar-wrap"><div class="stream-bar-fill" style="width:68%;background:#22c55e"></div></div>
+              <span class="stream-pct mono">68%</span>
+            </div>
+            <div class="stream-item">
+              <div class="stream-dot" style="background:#60a5fa"></div>
+              <span class="stream-name">Recyclable Plastic</span>
+              <div class="stream-bar-wrap"><div class="stream-bar-fill" style="width:14%;background:#60a5fa"></div></div>
+              <span class="stream-pct mono">14%</span>
+            </div>
+            <div class="stream-item">
+              <div class="stream-dot" style="background:#f59e0b"></div>
+              <span class="stream-name">Paper / Cardboard</span>
+              <div class="stream-bar-wrap"><div class="stream-bar-fill" style="width:10%;background:#f59e0b"></div></div>
+              <span class="stream-pct mono">10%</span>
+            </div>
+            <div class="stream-item">
+              <div class="stream-dot" style="background:#2dd4bf"></div>
+              <span class="stream-name">Metal / Glass</span>
+              <div class="stream-bar-wrap"><div class="stream-bar-fill" style="width:5%;background:#2dd4bf"></div></div>
+              <span class="stream-pct mono">5%</span>
+            </div>
+            <div class="stream-item">
+              <div class="stream-dot" style="background:#ef4444"></div>
+              <span class="stream-name">Hazardous</span>
+              <div class="stream-bar-wrap"><div class="stream-bar-fill" style="width:3%;background:#ef4444"></div></div>
+              <span class="stream-pct mono">3%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module Status -->
+        <div class="card">
+          <div class="card-head"><span class="card-title">Module Status</span></div>
+          <div class="module-list">
+            <div class="module-row"><span class="module-name">Anaerobic Digester</span><span class="badge badge-green">Active · 58°C</span></div>
+            <div class="module-row"><span class="module-name">Compost Chamber</span><span class="badge badge-green">Active</span></div>
+            <div class="module-row"><span class="module-name">Dry Sort Line</span><span class="badge badge-amber">Standby</span></div>
+            <div class="module-row"><span class="module-name">Pyrolysis Unit</span><span class="badge badge-amber">Standby</span></div>
+            <div class="module-row"><span class="module-name">RL Router</span><span class="badge badge-green">Running</span></div>
+            <div class="module-row"><span class="module-name">LSTM Forecast</span><span class="badge badge-green">Synced</span></div>
+            <div class="module-row"><span class="module-name">Federated Model</span><span class="badge badge-blue">Updated 06:00</span></div>
+          </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="card">
+          <div class="card-head"><span class="card-title">24h Waste Volume</span><span class="card-unit mono">kg</span></div>
+          <canvas id="barChart" height="120"></canvas>
+          <div class="chart-footer">
+            <span class="mono" style="font-size:11px;color:var(--text3)">00:00</span>
+            <span class="mono" style="font-size:11px;color:var(--text3)">12:00</span>
+            <span class="mono" style="font-size:11px;color:var(--text3)">Now</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Facility Network -->
+      <div class="card full-width">
+        <div class="card-head"><span class="card-title">Facility Network</span><span class="badge badge-green">4 Active Nodes</span></div>
+        <div class="facility-map" id="facilityMap">
+          <div class="map-bg-grid"></div>
+          <div class="map-node node-restaurant" style="top:30%;left:20%">
+            <div class="map-ping ping-green"></div>
+            <div class="map-dot" style="background:#22c55e"></div>
+            <div class="map-label">Restaurant A</div>
+          </div>
+          <div class="map-node" style="top:55%;left:55%">
+            <div class="map-ping ping-blue"></div>
+            <div class="map-dot" style="background:#60a5fa"></div>
+            <div class="map-label">Factory Unit</div>
+          </div>
+          <div class="map-node" style="top:22%;left:68%">
+            <div class="map-ping ping-teal"></div>
+            <div class="map-dot" style="background:#2dd4bf"></div>
+            <div class="map-label">Household Cluster</div>
+          </div>
+          <div class="map-node" style="top:68%;left:32%">
+            <div class="map-ping ping-amber"></div>
+            <div class="map-dot" style="background:#f59e0b"></div>
+            <div class="map-label">Restaurant B</div>
+          </div>
+        </div>
+        <div class="map-legend">
+          <span><span style="color:#22c55e">●</span> Restaurant (2 active)</span>
+          <span><span style="color:#60a5fa">●</span> Factory (1 active)</span>
+          <span><span style="color:#2dd4bf">●</span> Household (14 units)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SENSORS TAB ===================== -->
+    <section class="tab-content" id="tab-sensors">
+      <div class="row-grid">
+        <div class="card">
+          <div class="card-head"><span class="card-title">Gas Sensors</span><span class="badge badge-green">Live</span></div>
+          <div class="sensor-rows">
+            <div class="sensor-row"><span>CH₄ Methane</span><span class="mono" style="color:#22c55e" id="s-ch4">1,240 ppm</span></div>
+            <div class="sensor-row"><span>CO₂</span><span class="mono" style="color:#f59e0b" id="s-co2">3,820 ppm</span></div>
+            <div class="sensor-row"><span>NH₃ Ammonia</span><span class="mono" id="s-nh3">18 ppm</span></div>
+            <div class="sensor-row"><span>H₂S</span><span class="mono" id="s-h2s">4.2 ppm</span></div>
+            <div class="sensor-row"><span>VOC Index</span><span class="mono" id="s-voc">72 / 100</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Physical Sensors</span><span class="badge badge-green">Live</span></div>
+          <div class="sensor-rows">
+            <div class="sensor-row"><span>Bin A Weight</span><span class="mono" id="s-binA">48.3 kg</span></div>
+            <div class="sensor-row"><span>Bin B Weight</span><span class="mono" id="s-binB">12.1 kg</span></div>
+            <div class="sensor-row"><span>Moisture</span><span class="mono" style="color:#2dd4bf" id="s-moist">76%</span></div>
+            <div class="sensor-row"><span>pH Level</span><span class="mono" id="s-ph">5.8</span></div>
+            <div class="sensor-row"><span>Temperature</span><span class="mono" id="s-temp">29°C</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">AI Classification</span></div>
+          <div class="sensor-rows">
+            <div class="sensor-row"><span>Current Batch</span><span class="badge badge-green">Organic-High</span></div>
+            <div class="sensor-row"><span>CNN Confidence</span><span class="mono" style="color:#22c55e">94.2%</span></div>
+            <div class="sensor-row"><span>RF Confidence</span><span class="mono" style="color:#22c55e">91.7%</span></div>
+            <div class="sensor-row"><span>Fusion Score</span><span class="mono" style="color:#4ade80">93.1%</span></div>
+            <div class="sensor-row"><span>RL Route</span><span class="badge badge-blue">→ Digester</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card full-width">
+        <div class="card-head"><span class="card-title">LSTM Forecast — Next 24 Hours</span></div>
+        <div class="forecast-grid">
+          <div class="forecast-item">
+            <div class="forecast-label">+6 hours</div>
+            <div class="forecast-val mono" style="color:#22c55e">38 kg</div>
+            <div class="forecast-sub">Organic waste</div>
+          </div>
+          <div class="forecast-item">
+            <div class="forecast-label">+12 hours</div>
+            <div class="forecast-val mono" style="color:#f59e0b">71 kg</div>
+            <div class="forecast-sub">Peak dinner service</div>
+          </div>
+          <div class="forecast-item">
+            <div class="forecast-label">+24 hours</div>
+            <div class="forecast-val mono">156 kg</div>
+            <div class="forecast-sub">Expected total</div>
+          </div>
+          <div class="forecast-item">
+            <div class="forecast-label">Biogas Potential</div>
+            <div class="forecast-val mono" style="color:#2dd4bf">44 m³</div>
+            <div class="forecast-sub">CH₄ yield estimate</div>
+          </div>
+        </div>
+        <div class="forecast-notice">
+          <span style="color:#22c55e">●</span>
+          Digester pre-heat scheduled for <span class="mono" style="color:var(--text)">18:45</span> — 4 hrs before peak batch arrival
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BIOGAS TAB ===================== -->
+    <section class="tab-content" id="tab-biogas">
+      <div class="gauge-row">
+        <div class="card gauge-card">
+          <div class="card-title" style="text-align:center;margin-bottom:14px">Digester Fill</div>
+          <div class="gauge-wrap">
+            <svg class="gauge-svg" viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="var(--bg2)" stroke-width="10"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="#22c55e" stroke-width="10"
+                stroke-dasharray="301.6" stroke-dashoffset="96.5" stroke-linecap="round"
+                transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-pct mono" style="color:#22c55e">68%</div>
+              <div class="gauge-sub">capacity</div>
+            </div>
+          </div>
+          <div class="gauge-foot">68.4 kg loaded</div>
+        </div>
+        <div class="card gauge-card">
+          <div class="card-title" style="text-align:center;margin-bottom:14px">CH₄ Tank</div>
+          <div class="gauge-wrap">
+            <svg class="gauge-svg" viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="var(--bg2)" stroke-width="10"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="#2dd4bf" stroke-width="10"
+                stroke-dasharray="301.6" stroke-dashoffset="150.8" stroke-linecap="round"
+                transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-pct mono" style="color:#2dd4bf">50%</div>
+              <div class="gauge-sub">tank</div>
+            </div>
+          </div>
+          <div class="gauge-foot">2.4 bar · 38.4 m³</div>
+        </div>
+        <div class="card gauge-card">
+          <div class="card-title" style="text-align:center;margin-bottom:14px">Gas Offset</div>
+          <div class="gauge-wrap">
+            <svg class="gauge-svg" viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="var(--bg2)" stroke-width="10"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="#f59e0b" stroke-width="10"
+                stroke-dasharray="301.6" stroke-dashoffset="211.1" stroke-linecap="round"
+                transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-pct mono" style="color:#f59e0b">30%</div>
+              <div class="gauge-sub">offset</div>
+            </div>
+          </div>
+          <div class="gauge-foot">30% cooking gas offset</div>
+        </div>
+        <div class="card gauge-card">
+          <div class="card-title" style="text-align:center;margin-bottom:14px">Digestate</div>
+          <div class="gauge-wrap">
+            <svg class="gauge-svg" viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="var(--bg2)" stroke-width="10"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="#60a5fa" stroke-width="10"
+                stroke-dasharray="301.6" stroke-dashoffset="181" stroke-linecap="round"
+                transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-pct mono" style="color:#60a5fa">40%</div>
+              <div class="gauge-sub">collected</div>
+            </div>
+          </div>
+          <div class="gauge-foot">Slurry → compost</div>
+        </div>
+      </div>
+
+      <!-- Closed Loop Flow -->
+      <div class="card full-width">
+        <div class="card-head"><span class="card-title">Closed Loop Flow — Restaurant Circular Economy</span></div>
+        <div class="flow-pipeline">
+          <div class="flow-node">
+            <div class="flow-icon" style="background:rgba(34,197,94,.1);color:#22c55e">🗑</div>
+            <div class="flow-node-val mono" style="color:#22c55e">142 kg</div>
+            <div class="flow-node-label">Kitchen Waste</div>
+          </div>
+          <div class="flow-arrow">
+            <div class="flow-label-small">detects & routes</div>
+            <div class="flow-line"><div class="flow-animated"></div></div>
+          </div>
+          <div class="flow-node">
+            <div class="flow-icon" style="background:rgba(45,212,191,.1);color:#2dd4bf">⚗</div>
+            <div class="flow-node-val mono" style="color:#2dd4bf">58°C</div>
+            <div class="flow-node-label">Anaerobic Digester</div>
+          </div>
+          <div class="flow-arrow">
+            <div class="flow-label-small">produces CH₄</div>
+            <div class="flow-line"><div class="flow-animated"></div></div>
+          </div>
+          <div class="flow-node">
+            <div class="flow-icon" style="background:rgba(245,158,11,.1);color:#f59e0b">🔥</div>
+            <div class="flow-node-val mono" style="color:#f59e0b">38.4 m³</div>
+            <div class="flow-node-label">Biogas Output</div>
+          </div>
+          <div class="flow-arrow">
+            <div class="flow-label-small">cooking fuel</div>
+            <div class="flow-line"><div class="flow-animated"></div></div>
+          </div>
+          <div class="flow-node flow-node-highlight">
+            <div class="flow-icon" style="background:rgba(34,197,94,.15);color:#4ade80">♻</div>
+            <div class="flow-node-val mono" style="color:#4ade80">30%</div>
+            <div class="flow-node-label">Restaurant Offset</div>
+          </div>
+        </div>
+        <div class="closed-loop-notice">
+          ✓ Closed loop active — RL router applied ClosedLoopBonus reward · ₹840 saved today · 67 kg CO₂ avoided
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== AI MODELS TAB ===================== -->
+    <section class="tab-content" id="tab-ai">
+      <div class="ai-grid">
+        <div class="card">
+          <div class="card-head"><span class="card-title">CNN Classifier</span><span class="badge badge-green">Active</span></div>
+          <div class="ai-stat-row"><span>Model</span><span class="mono">EfficientNet-B4</span></div>
+          <div class="ai-stat-row"><span>Accuracy</span><span class="mono" style="color:#22c55e">94.2%</span></div>
+          <div class="ai-stat-row"><span>Classes</span><span class="mono">22 waste types</span></div>
+          <div class="ai-stat-row"><span>Dataset</span><span class="mono">WasteNet-47K</span></div>
+          <div class="ai-stat-row"><span>Inference</span><span class="mono">~120ms</span></div>
+          <div class="ai-stat-row"><span>Last Update</span><span class="mono">06:00 today</span></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">LSTM Forecaster</span><span class="badge badge-green">Synced</span></div>
+          <div class="ai-stat-row"><span>Architecture</span><span class="mono">BiLSTM · 2L · 128h</span></div>
+          <div class="ai-stat-row"><span>MAE</span><span class="mono" style="color:#22c55e">3.2 kg</span></div>
+          <div class="ai-stat-row"><span>Horizon</span><span class="mono">24 / 48 / 72h</span></div>
+          <div class="ai-stat-row"><span>Coverage</span><span class="mono">≥ 90%</span></div>
+          <div class="ai-stat-row"><span>Features</span><span class="mono">11 inputs</span></div>
+          <div class="ai-stat-row"><span>Retrain cycle</span><span class="mono">Weekly</span></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">RL Router (PPO)</span><span class="badge badge-green">Running</span></div>
+          <div class="ai-stat-row"><span>Algorithm</span><span class="mono">PPO · γ=0.99</span></div>
+          <div class="ai-stat-row"><span>Avg Reward</span><span class="mono" style="color:#22c55e">+2.84</span></div>
+          <div class="ai-stat-row"><span>Loop Bonus</span><span class="mono" style="color:#4ade80">Active</span></div>
+          <div class="ai-stat-row"><span>Action Space</span><span class="mono">5 modules</span></div>
+          <div class="ai-stat-row"><span>Episodes</span><span class="mono">1,247</span></div>
+          <div class="ai-stat-row"><span>Policy</span><span class="mono">Stochastic</span></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Knowledge Graph</span></div>
+          <div class="ai-stat-row"><span>Engine</span><span class="mono">Neo4j + GraphSAGE</span></div>
+          <div class="ai-stat-row"><span>Nodes</span><span class="mono">12,048</span></div>
+          <div class="ai-stat-row"><span>Edges</span><span class="mono">38,210</span></div>
+          <div class="ai-stat-row"><span>Paths</span><span class="mono">22 waste types</span></div>
+          <div class="ai-stat-row"><span>Update</span><span class="mono">Real-time</span></div>
+          <div class="ai-stat-row"><span>Query</span><span class="mono">SPARQL</span></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Anomaly Detection</span><span class="badge badge-green">Monitoring</span></div>
+          <div class="ai-stat-row"><span>Method</span><span class="mono">Isolation Forest</span></div>
+          <div class="ai-stat-row"><span>LSTM AE</span><span class="mono">Active</span></div>
+          <div class="ai-stat-row"><span>FPR</span><span class="mono" style="color:#22c55e">0.3%</span></div>
+          <div class="ai-stat-row"><span>Fusion</span><span class="mono">Bayesian AND</span></div>
+          <div class="ai-stat-row"><span>Contamination</span><span class="mono">0.05</span></div>
+          <div class="ai-stat-row"><span>Trees</span><span class="mono">200</span></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Federated Learning</span><span class="badge badge-blue">Global</span></div>
+          <div class="ai-stat-row"><span>Algorithm</span><span class="mono">FedAvg</span></div>
+          <div class="ai-stat-row"><span>Active Sites</span><span class="mono" style="color:#22c55e">17</span></div>
+          <div class="ai-stat-row"><span>Round</span><span class="mono">Weekly</span></div>
+          <div class="ai-stat-row"><span>Privacy</span><span class="mono">Gradient only</span></div>
+          <div class="ai-stat-row"><span>Gain</span><span class="mono" style="color:#22c55e">+2.1% acc</span></div>
+          <div class="ai-stat-row"><span>Last sync</span><span class="mono">06:00 today</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FACILITIES TAB ===================== -->
+    <section class="tab-content" id="tab-facilities">
+      <div class="facility-grid">
+        <div class="card facility-card">
+          <div class="facility-header" style="border-left:3px solid #22c55e">
+            <div>
+              <div class="facility-name">Restaurant A</div>
+              <div class="facility-type">Food Service · Active</div>
+            </div>
+            <span class="badge badge-green">Online</span>
+          </div>
+          <div class="facility-stats">
+            <div class="fstat"><div class="fstat-val mono">48 kg</div><div class="fstat-lbl">Waste today</div></div>
+            <div class="fstat"><div class="fstat-val mono" style="color:#2dd4bf">14.2 m³</div><div class="fstat-lbl">Biogas out</div></div>
+            <div class="fstat"><div class="fstat-val mono" style="color:#22c55e">30%</div><div class="fstat-lbl">Gas offset</div></div>
+          </div>
+          <div class="facility-bar"><div style="width:72%;background:#22c55e"></div></div>
+          <div class="facility-bar-label"><span>Digester 72% full</span><span class="mono">58°C</span></div>
+        </div>
+        <div class="card facility-card">
+          <div class="facility-header" style="border-left:3px solid #f59e0b">
+            <div>
+              <div class="facility-name">Restaurant B</div>
+              <div class="facility-type">Food Service · Active</div>
+            </div>
+            <span class="badge badge-amber">Warning</span>
+          </div>
+          <div class="facility-stats">
+            <div class="fstat"><div class="fstat-val mono">36 kg</div><div class="fstat-lbl">Waste today</div></div>
+            <div class="fstat"><div class="fstat-val mono" style="color:#2dd4bf">9.8 m³</div><div class="fstat-lbl">Biogas out</div></div>
+            <div class="fstat"><div class="fstat-val mono" style="color:#f59e0b">22%</div><div class="fstat-lbl">Gas offset</div></div>
+          </div>
+          <div class="facility-bar"><div style="width:40%;background:#f59e0b"></div></div>
+          <div class="facility-bar-label"><span>Compost low humidity</span><span class="mono">34%</span></div>
+        </div>
+        <div class="card facility-card">
+          <div class="facility-header" style="border-left:3px solid #60a5fa">
+            <div>
+              <div class="facility-name">Factory Unit</div>
+              <div class="facility-type">Industrial · Active</div>
+            </div>
+            <span class="badge badge-blue">Processing</span>
+          </div>
+          <div class="facility-stats">
+            <div class="fstat"><div class="fstat-val mono">84 kg</div><div class="fstat-lbl">Waste today</div></div>
+            <div class="fstat"><div class="fstat-val mono" style="color:#60a5fa">6.4 kWh</div><div class="fstat-lbl">Energy rec.</div></div>
+            <div class="fstat"><div class="fstat-val mono" style="color:#22c55e">88%</div><div class="fstat-lbl">Recycled</div></div>
+          </div>
+          <div class="facility-bar"><div style="width:88%;background:#60a5fa"></div></div>
+          <div class="facility-bar-label"><span>Sort line 88% throughput</span><span class="mono">Active</span></div>
+        </div>
+        <div class="card facility-card">
+          <div class="facility-header" style="border-left:3px solid #2dd4bf">
+            <div>
+              <div class="facility-name">Household Cluster</div>
+              <div class="facility-type">Residential · 14 units</div>
+            </div>
+            <span class="badge badge-green">Online</span>
+          </div>
+          <div class="facility-stats">
+            <div class="fstat"><div class="fstat-val mono">21 kg</div><div class="fstat-lbl">Waste today</div></div>
+            <div class="fstat"><div class="fstat-val mono" style="color:#2dd4bf">18 kg</div><div class="fstat-lbl">Compost out</div></div>
+            <div class="fstat"><div class="fstat-val mono" style="color:#22c55e">86%</div><div class="fstat-lbl">Diverted</div></div>
+          </div>
+          <div class="facility-bar"><div style="width:86%;background:#2dd4bf"></div></div>
+          <div class="facility-bar-label"><span>86% landfill diversion</span><span class="mono">Good</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ALERTS TAB ===================== -->
+    <section class="tab-content" id="tab-alerts">
+      <div class="card full-width">
+        <div class="card-head">
+          <span class="card-title">System Alerts</span>
+          <div style="display:flex;gap:8px">
+            <span class="badge badge-red">3 Active</span>
+            <button class="text-btn" onclick="clearAlerts()">Clear all</button>
+          </div>
+        </div>
+        <div id="alerts-container">
+          <div class="alert-item alert-amber">
+            <div class="alert-icon-wrap amber">!</div>
+            <div class="alert-body">
+              <div class="alert-msg">Bin B fill level at 88% — collection recommended within 2 hours</div>
+              <div class="alert-meta">09:42 · Factory Unit · Auto-route: Dry Sort Line</div>
+            </div>
+            <button class="alert-close" onclick="this.closest('.alert-item').remove()">✕</button>
+          </div>
+          <div class="alert-item alert-green">
+            <div class="alert-icon-wrap green">✓</div>
+            <div class="alert-body">
+              <div class="alert-msg">Digester pre-heat completed — Restaurant A batch ready for processing</div>
+              <div class="alert-meta">09:15 · Restaurant A · Biogas yield: +12%</div>
+            </div>
+            <button class="alert-close" onclick="this.closest('.alert-item').remove()">✕</button>
+          </div>
+          <div class="alert-item alert-red">
+            <div class="alert-icon-wrap red">✗</div>
+            <div class="alert-body">
+              <div class="alert-msg">Anomaly detected — Isolation Forest flagged unusual H₂S spike (28 ppm)</div>
+              <div class="alert-meta">08:53 · Household Cluster · Equipment auto-paused for safety</div>
+            </div>
+            <button class="alert-close" onclick="this.closest('.alert-item').remove()">✕</button>
+          </div>
+          <div class="alert-item alert-green">
+            <div class="alert-icon-wrap green">✓</div>
+            <div class="alert-body">
+              <div class="alert-msg">Federated model update received — classification accuracy improved to 94.2%</div>
+              <div class="alert-meta">06:00 · Global · 17 sites contributed gradients</div>
+            </div>
+            <button class="alert-close" onclick="this.closest('.alert-item').remove()">✕</button>
+          </div>
+          <div class="alert-item alert-amber">
+            <div class="alert-icon-wrap amber">!</div>
+            <div class="alert-body">
+              <div class="alert-msg">Compost chamber humidity low (34%) — moisture injection recommended</div>
+              <div class="alert-meta">05:30 · Restaurant B · Aerobic efficiency: -8%</div>
+            </div>
+            <button class="alert-close" onclick="this.closest('.alert-item').remove()">✕</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== REPORTS TAB ===================== -->
+    <section class="tab-content" id="tab-reports">
+      <div class="row-grid">
+        <div class="card">
+          <div class="card-head"><span class="card-title">ESG Summary — This Month</span></div>
+          <div class="report-stat"><div class="rs-val mono" style="color:#22c55e">1,840 kg</div><div class="rs-lbl">Total waste processed</div></div>
+          <div class="report-stat"><div class="rs-val mono" style="color:#2dd4bf">487 m³</div><div class="rs-lbl">Biogas produced</div></div>
+          <div class="report-stat"><div class="rs-val mono" style="color:#60a5fa">872 kg</div><div class="rs-lbl">CO₂ offset</div></div>
+          <div class="report-stat"><div class="rs-val mono" style="color:#f59e0b">₹24,600</div><div class="rs-lbl">Cost savings</div></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Conversion Efficiency</span></div>
+          <div class="eff-row"><span>Organic → Biogas</span><div class="eff-bar-wrap"><div class="eff-bar" style="width:82%;background:#22c55e"></div></div><span class="mono">82%</span></div>
+          <div class="eff-row"><span>Plastic → Recycled</span><div class="eff-bar-wrap"><div class="eff-bar" style="width:75%;background:#60a5fa"></div></div><span class="mono">75%</span></div>
+          <div class="eff-row"><span>Organic → Compost</span><div class="eff-bar-wrap"><div class="eff-bar" style="width:91%;background:#2dd4bf"></div></div><span class="mono">91%</span></div>
+          <div class="eff-row"><span>Residual → Energy</span><div class="eff-bar-wrap"><div class="eff-bar" style="width:60%;background:#f59e0b"></div></div><span class="mono">60%</span></div>
+          <div class="eff-row"><span>Landfill Diversion</span><div class="eff-bar-wrap"><div class="eff-bar" style="width:89%;background:#4ade80"></div></div><span class="mono">89%</span></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">Model Performance</span></div>
+          <div class="eff-row"><span>CNN Accuracy</span><div class="eff-bar-wrap"><div class="eff-bar" style="width:94%;background:#22c55e"></div></div><span class="mono">94.2%</span></div>
+          <div class="eff-row"><span>LSTM MAE</span><div class="eff-bar-wrap"><div class="eff-bar" style="width:78%;background:#2dd4bf"></div></div><span class="mono">3.2 kg</span></div>
+          <div class="eff-row"><span>RL Avg Reward</span><div class="eff-bar-wrap"><div class="eff-bar" style="width:85%;background:#f59e0b"></div></div><span class="mono">+2.84</span></div>
+          <div class="eff-row"><span>Anomaly FPR</span><div class="eff-bar-wrap"><div class="eff-bar" style="width:3%;background:#ef4444"></div></div><span class="mono">0.3%</span></div>
+          <div class="eff-row"><span>Fed. Accuracy Gain</span><div class="eff-bar-wrap"><div class="eff-bar" style="width:55%;background:#60a5fa"></div></div><span class="mono">+2.1%</span></div>
+        </div>
+      </div>
+      <div class="card full-width" style="text-align:center;padding:24px">
+        <button class="download-btn" onclick="alert('Report download would trigger PDF generation via backend API')">
+          ↓ Download Full ESG Report (PDF)
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
