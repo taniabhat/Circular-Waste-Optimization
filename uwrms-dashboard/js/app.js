@@ -581,7 +581,7 @@ window.handleChatKey = function(e) {
   if (e.key === 'Enter') sendChatMessage();
 };
 
-const GROQ_API_KEY = 'YOUR_API_KEY_HERE';
+
 let chatHistory = [
   { role: 'system', content: 'You are a helpful AI assistant for the UWRMS (Waste Intelligence Platform) dashboard. Answer concisely and use metrics when relevant.' }
 ];
@@ -605,16 +605,13 @@ window.sendChatMessage = async function() {
   typing.style.display = 'block';
 
   try {
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const res = await fetch(API_URL + '/api/chat', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${GROQ_API_KEY}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'llama-3.1-8b-instant',
-        messages: chatHistory,
-        max_tokens: 150
+        messages: chatHistory
       })
     });
 
