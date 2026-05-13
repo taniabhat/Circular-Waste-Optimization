@@ -1,0 +1,5 @@
+0: Plastic
+1: Organic
+2: E-Waste
+3: Construction
+4: Hazardous
