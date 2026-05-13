@@ -553,6 +553,40 @@ window.clearAlerts = function() {
   if (badge) badge.style.display = 'none';
 };
 
+/* ── ESG PDF REPORT DOWNLOAD ── */
+window.downloadESGReport = async function() {
+  const btn = document.querySelector('.download-btn');
+  if (btn) btn.textContent = 'Generating PDF...';
+  try {
+    const reportData = {
+      total_waste: document.getElementById('kpi-waste')?.textContent || 'N/A',
+      recycling_rate: document.getElementById('kpi-biogas')?.textContent || 'N/A',
+      cities_covered: document.getElementById('kpi-co2')?.textContent || 'N/A',
+      avg_cost: document.getElementById('kpi-cost')?.textContent || 'N/A'
+    };
+    const res = await fetch(`${ML_API_URL}/api/reports/esg-pdf`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(reportData)
+    });
+    if (!res.ok) throw new Error('PDF generation failed');
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'UWRMS_ESG_Report.pdf';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error('PDF download error:', err);
+    alert('Failed to generate PDF. Make sure the ML service is running on port 8000.');
+  } finally {
+    if (btn) btn.textContent = '↓ Download Full ESG Report (PDF)';
+  }
+};
+
 /* ── CANVAS POLYFILL FOR roundRect ── */
 if (!CanvasRenderingContext2D.prototype.roundRect) {
   CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {

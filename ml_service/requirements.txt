@@ -4,3 +4,11 @@ scikit-learn
 pandas
 numpy
 pydantic
+torch
+torchvision
+timm
+transformers
+networkx
+fpdf2
+Pillow
+joblib
