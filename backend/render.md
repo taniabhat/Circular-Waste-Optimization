@@ -8,6 +8,6 @@
 # node server.js
 
 # Environment Variables (set in Render dashboard):
-# MONGO_URI = mongodb+srv://taniabhat2017_db_user:EXSQc8LKt4qQXUWm@cluster0.fhgvtgm.mongodb.net/uwrms?appName=Cluster0
-# JWT_SECRET = uwrms_s3cr3t_k3y_7x9Qm2vL8pNw4RfJ6tYhBdAe
+# MONGO_URI = <YOUR_MONGO_URI_HERE>
+# JWT_SECRET = <YOUR_JWT_SECRET_HERE>
 # PORT = 10000
