@@ -8,7 +8,7 @@
 // ── API Configuration ──
 const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:5000'
-  : 'https://uwrms-backend.onrender.com'; // ✅ Live on Render
+  : 'https://circular-waste-optimization.onrender.com'; // ✅ Live on Render
 
 // ── Auth Guard ──
 const token = localStorage.getItem('uwrms_token');
@@ -83,13 +83,13 @@ document.querySelectorAll('.nav-item').forEach(item => {
     if (target) target.classList.add('active');
 
     const titles = {
-      overview:   'Overview',
-      sensors:    'Sensors',
-      biogas:     'Biogas Loop',
-      ai:         'AI Models',
+      overview: 'Overview',
+      sensors: 'Sensors',
+      biogas: 'Biogas Loop',
+      ai: 'AI Models',
       facilities: 'Facilities',
-      alerts:     'Alerts',
-      reports:    'Reports'
+      alerts: 'Alerts',
+      reports: 'Reports'
     };
     const el = document.getElementById('page-title');
     if (el) el.textContent = titles[tabName] || tabName;
@@ -110,11 +110,11 @@ setInterval(updateClock, 1000);
 
 // Color map for waste types
 const wasteColors = {
-  'Organic':       { color: 'var(--green3)', label: 'Organic / Kitchen' },
-  'Plastic':       { color: 'var(--blue)', label: 'Recyclable Plastic' },
-  'Construction':  { color: 'var(--amber)', label: 'Construction' },
-  'E-Waste':       { color: 'var(--teal)', label: 'E-Waste' },
-  'Hazardous':     { color: 'var(--red)', label: 'Hazardous' }
+  'Organic': { color: 'var(--green3)', label: 'Organic / Kitchen' },
+  'Plastic': { color: 'var(--blue)', label: 'Recyclable Plastic' },
+  'Construction': { color: 'var(--amber)', label: 'Construction' },
+  'E-Waste': { color: 'var(--teal)', label: 'E-Waste' },
+  'Hazardous': { color: 'var(--red)', label: 'Hazardous' }
 };
 
 // ── 1. Load Overview KPIs ──
@@ -432,15 +432,15 @@ function randInt(min, max) { return Math.round(rand(min, max)); }
 
 function updateSensors() {
   const map = {
-    's-ch4':  () => randInt(1200, 1280) + ' ppm',
-    's-co2':  () => randInt(3800, 3900) + ' ppm',
-    's-nh3':  () => rand(16, 21).toFixed(1) + ' ppm',
-    's-h2s':  () => rand(3.8, 5.0).toFixed(1) + ' ppm',
-    's-voc':  () => randInt(68, 78) + ' / 100',
+    's-ch4': () => randInt(1200, 1280) + ' ppm',
+    's-co2': () => randInt(3800, 3900) + ' ppm',
+    's-nh3': () => rand(16, 21).toFixed(1) + ' ppm',
+    's-h2s': () => rand(3.8, 5.0).toFixed(1) + ' ppm',
+    's-voc': () => randInt(68, 78) + ' / 100',
     's-binA': () => rand(46, 52).toFixed(1) + ' kg',
     's-binB': () => rand(10, 14).toFixed(1) + ' kg',
-    's-moist':() => randInt(74, 79) + '%',
-    's-ph':   () => rand(5.5, 6.2).toFixed(1),
+    's-moist': () => randInt(74, 79) + '%',
+    's-ph': () => rand(5.5, 6.2).toFixed(1),
     's-temp': () => randInt(27, 32) + '°C',
   };
   Object.entries(map).forEach(([id, fn]) => {
@@ -450,9 +450,7 @@ function updateSensors() {
 }
 
 /* ── ML INTEGRATION ── */
-const ML_API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-  ? 'http://localhost:8000'
-  : 'https://YOUR_HF_USERNAME-uwrms-ml-service.hf.space'; // ← Replace YOUR_HF_USERNAME after HF deployment
+const ML_API_URL = 'http://localhost:8000';
 
 async function fetchML() {
   try {
@@ -461,7 +459,7 @@ async function fetchML() {
     const temperature_c = parseFloat(document.getElementById('s-temp').textContent) || 30;
     const ph_level = parseFloat(document.getElementById('s-ph').textContent) || 6.0;
     const methane_voc_ppm = parseFloat(document.getElementById('s-ch4').textContent.replace(/,/g, '')) || 1200;
-    
+
     const sensorPayload = {
       weight_kg,
       moisture_pct,
@@ -548,7 +546,7 @@ function stopLiveUpdates() {
 startLiveUpdates();
 
 /* ── CLEAR ALERTS ── */
-window.clearAlerts = function() {
+window.clearAlerts = function () {
   const container = document.getElementById('alerts-container');
   if (container) container.innerHTML = '<p style="text-align:center;color:var(--text3);padding:32px;font-size:13px">No active alerts</p>';
   const badge = document.getElementById('alert-badge');
@@ -556,7 +554,7 @@ window.clearAlerts = function() {
 };
 
 /* ── ESG PDF REPORT DOWNLOAD ── */
-window.downloadESGReport = async function() {
+window.downloadESGReport = async function () {
   const btn = document.querySelector('.download-btn');
   if (btn) btn.textContent = 'Generating PDF...';
   try {
@@ -583,7 +581,7 @@ window.downloadESGReport = async function() {
     URL.revokeObjectURL(url);
   } catch (err) {
     console.error('PDF download error:', err);
-    alert('Failed to generate PDF. Make sure the ML service is running (port 8000 locally or HuggingFace Spaces in production).');
+    alert('Failed to generate PDF. Make sure the ML service is running on port 8000.');
   } finally {
     if (btn) btn.textContent = '↓ Download Full ESG Report (PDF)';
   }
@@ -591,7 +589,7 @@ window.downloadESGReport = async function() {
 
 /* ── CANVAS POLYFILL FOR roundRect ── */
 if (!CanvasRenderingContext2D.prototype.roundRect) {
-  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+  CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
     const [tl, tr, br, bl] = Array.isArray(r) ? r : [r, r, r, r];
     this.moveTo(x + tl, y);
     this.lineTo(x + w - tr, y);
@@ -608,12 +606,12 @@ if (!CanvasRenderingContext2D.prototype.roundRect) {
 }
 
 /* ── CHATBOT LOGIC ── */
-window.toggleChat = function() {
+window.toggleChat = function () {
   const win = document.getElementById('chatWindow');
   win.classList.toggle('active');
 };
 
-window.handleChatKey = function(e) {
+window.handleChatKey = function (e) {
   if (e.key === 'Enter') sendChatMessage();
 };
 
@@ -622,7 +620,7 @@ let chatHistory = [
   { role: 'system', content: 'You are a helpful AI assistant for the UWRMS (Waste Intelligence Platform) dashboard. Answer concisely and use metrics when relevant.' }
 ];
 
-window.sendChatMessage = async function() {
+window.sendChatMessage = async function () {
   const input = document.getElementById('chatInput');
   const msgs = document.getElementById('chatMessages');
   const typing = document.getElementById('chatTyping');
@@ -653,7 +651,7 @@ window.sendChatMessage = async function() {
 
     const data = await res.json();
     let botReply = 'Sorry, I encountered an error.';
-    
+
     if (res.ok && data.choices && data.choices[0]) {
       botReply = data.choices[0].message.content;
       chatHistory.push({ role: 'assistant', content: botReply });
