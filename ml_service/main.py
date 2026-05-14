@@ -201,6 +201,46 @@ CLUSTER_LABELS = {
 
 
 # ==========================================
+# ROOT & HEALTH ENDPOINTS
+# ==========================================
+from fastapi.responses import JSONResponse
+
+@app.get("/")
+async def root():
+    return JSONResponse({
+        "status": "ok",
+        "service": "UWRMS AI Processing Core",
+        "version": "3.0.0",
+        "models_loaded": {
+            "random_forest": rf_model is not None,
+            "isolation_forest": iso_forest is not None,
+            "cnn_efficientnet_b4": cnn_model is not None,
+            "bert_nlp": nlp_sentiment is not None,
+            "bilstm_forecaster": lstm_model is not None,
+            "rl_agent": rl_agent_data is not None,
+            "knowledge_graph": waste_kg is not None,
+        },
+        "docs": "/docs",
+        "endpoints": {
+            "cnn": "/api/layer1/computer-vision/cnn",
+            "nlp": "/api/layer1/nlp-engine/parse",
+            "anomaly": "/api/layer1/anomaly-detection/sensor",
+            "random_forest": "/api/layer2/random-forest/classify/sensor",
+            "lstm": "/api/layer2/lstm-network/forecast",
+            "rl_engine": "/api/layer2/rl-engine/optimize-route",
+            "knowledge_graph": "/api/layer2/knowledge-graph/query",
+            "esg_pdf": "/api/reports/esg-pdf"
+        }
+    })
+
+@app.get("/health")
+async def health():
+    return {"status": "healthy", "models_ready": all([
+        rf_model is not None, iso_forest is not None
+    ])}
+
+
+# ==========================================
 # PYDANTIC MODELS (DATA SCHEMAS)
 # ==========================================
 

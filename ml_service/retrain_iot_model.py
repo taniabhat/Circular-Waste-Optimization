@@ -21,6 +21,7 @@ for w_type in waste_types:
         # Default ranges
         weight = np.random.uniform(10, 60)
         moist = np.random.uniform(10, 90)
+        
         temp = np.random.uniform(20, 45)
         ph = np.random.uniform(4.0, 9.0)
         methane = np.random.uniform(0, 3000)
