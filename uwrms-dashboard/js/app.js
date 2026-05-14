@@ -8,7 +8,7 @@
 // ── API Configuration ──
 const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:5000'
-  : 'https://uwrms-backend.onrender.com'; // Update after Render deployment
+  : 'https://uwrms-backend.onrender.com'; // ✅ Live on Render
 
 // ── Auth Guard ──
 const token = localStorage.getItem('uwrms_token');
@@ -450,7 +450,9 @@ function updateSensors() {
 }
 
 /* ── ML INTEGRATION ── */
-const ML_API_URL = 'http://localhost:8000';
+const ML_API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://localhost:8000'
+  : 'https://YOUR_HF_USERNAME-uwrms-ml-service.hf.space'; // ← Replace YOUR_HF_USERNAME after HF deployment
 
 async function fetchML() {
   try {
@@ -581,7 +583,7 @@ window.downloadESGReport = async function() {
     URL.revokeObjectURL(url);
   } catch (err) {
     console.error('PDF download error:', err);
-    alert('Failed to generate PDF. Make sure the ML service is running on port 8000.');
+    alert('Failed to generate PDF. Make sure the ML service is running (port 8000 locally or HuggingFace Spaces in production).');
   } finally {
     if (btn) btn.textContent = '↓ Download Full ESG Report (PDF)';
   }
