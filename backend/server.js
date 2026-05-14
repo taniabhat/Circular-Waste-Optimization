@@ -21,6 +21,7 @@ app.use(cors({
     'http://localhost:5500',
     'http://127.0.0.1:5500',
     'http://127.0.0.1:8080',
+    'https://circular-waste-optimization.vercel.app',
     /\.vercel\.app$/  // Allow all Vercel deployments
   ],
   credentials: true

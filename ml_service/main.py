@@ -29,7 +29,13 @@ app = FastAPI(
 from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:8080",
+        "http://127.0.0.1:3000",
+        "https://circular-waste-optimization.vercel.app",
+        "*"  # Keep wildcard for HuggingFace iframe and other clients
+    ],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
