@@ -450,7 +450,9 @@ function updateSensors() {
 }
 
 /* ── ML INTEGRATION ── */
-const ML_API_URL = 'http://localhost:8000';
+const ML_API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://localhost:8000'
+  : 'https://biii001-uwrms.hf.space';
 
 async function fetchML() {
   try {
